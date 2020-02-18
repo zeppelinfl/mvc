@@ -1,0 +1,12 @@
+<?php
+define("DB_SERVER", "server");
+define("DB_USERNAME", "username");
+define("DB_PASSWORD", "password");
+define("DB_DATABASE", "db_name");
+// Create connection
+$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+//mysqli_close($conn);

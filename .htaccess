@@ -1,0 +1,12 @@
+DirectoryIndex index.php
+RewriteEngine On
+
+RewriteCond %{THE_REQUEST} \s/+webroot/(\S*) [NC]
+RewriteRule ^ /%1 [R=301,NE,L]
+
+RewriteRule ^(index\.php)?$ webroot/index.php [NC,L]
+
+# internally forward /anything to /webroot/anything
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(?!webroot/).+$ webroot/$0 [NC,L]
