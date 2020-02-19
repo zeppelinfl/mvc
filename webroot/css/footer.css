@@ -1,0 +1,26 @@
+.row-grey {
+	color:grey;
+	font-size:16px;
+	margin-top:30px;
+}
+.margin-top-40 {
+	margin-top:40px;
+}
+.margin-bottom-40 {
+	margin-bottom: 40px;
+}
+.margin-left-20px {
+	margin-left: 20px;
+}
+.white {
+	color:#ffffff;
+}
+.email-format {
+	color:#ffffff;
+	background-color: transparent;
+	border:none;
+	border-bottom: 1px solid #ffffff;
+}
+.pad-them {
+	padding-left:5px;
+}

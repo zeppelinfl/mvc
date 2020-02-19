@@ -1,0 +1,89 @@
+header {
+	margin:0px;
+	padding: 0px;	
+}
+.navbar {
+	padding: 0 !important;
+	z-index: 200;
+	border-bottom: 1px solid #e2e2e2;
+	background-color: transparent;
+	color:#ffffff;
+}
+.nav-items-right {
+	color:#ffffff;
+	height: auto;
+	margin-top:20px;
+}
+.nav-items-left {
+	height: auto;
+	margin-top:20px;
+
+}
+.fa-map-marker {
+	color:pink;
+	font-size:25px;
+	padding-right:20px;
+	font-size: 26px !important;
+	padding-right:20px;
+}
+.logo-text {
+	font-family: Verdana, Geneva, sans-serif; 
+	float: right;
+	padding-left:10px;	
+}
+.header-top {
+	margin-top:9px;
+}
+.home-text {
+	font-family: Verdana, Geneva, sans-serif; 
+	float: left;
+	padding-right:10px;
+}
+.pages-text {
+	font-family: Verdana, Geneva, sans-serif; 
+	float: left;
+	padding-right:10px;
+	padding-left:30px;
+}
+.contacts-text {
+	padding-left:30px;
+	color:#ffffff;
+}
+.fa-user {
+	padding-left:20px;
+	padding-right:20px;
+}
+.bordered {
+	float: right;
+	border: 2px solid #ffffff;
+	border-radius:20px;
+	width:150px;
+	height: 40px;
+	text-align: center;
+}
+.bordered-red {
+	float: right;
+	border: 2px solid red;
+	border-radius:20px;
+	width:150px;
+	height: 40px;
+	text-align: center;
+}
+.bordered-left {
+	border: 2px solid #ffffff;
+	border-radius:20px;
+	width:150px;
+	height: 40px;
+	text-align: center;
+}
+.line {
+	border-top:1px solid #000000;
+	height: 90%;
+}
+.logo {
+	width:20%;
+	float: left;
+}
+.hover-border {
+	height: 43px;
+}

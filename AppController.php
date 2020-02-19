@@ -74,18 +74,24 @@ class AppController
         $this->vars = array_merge($this->vars, $d);
     }
 
-	function render($filename) 
+	function render($filename = '') 
 	{
+		if($filename == '') {
+			$filename = $this->parseUrl()[1];
+		}
 		extract($this->vars);
 		ob_start();
-		require(ROOT . 'app/views/' . strtolower(str_replace('Controller', '', get_class($this))) . '/' . $filename . '.php');
+
+		if(file_exists(ROOT . 'app/views/'.$this->parseUrl()[0].'/'.$filename.'.php')) {
+			require(ROOT . 'app/views/' . strtolower(str_replace('Controller', '', get_class($this))) . '/' . $filename . '.php');	
+		}
 
 		$header = ob_get_clean();
-		$content_for_layout = ob_get_clean();
+		$body = ob_get_clean();
 		$footer = ob_get_clean();
 
 		if($this->layout == false) {
-			$content_for_layout;
+			$body;
 		} else {
 			require(ROOT . 'app/views/layouts/header.php');
 			require(ROOT . 'app/views/layouts/' . $this->layout . '.php');

@@ -12,15 +12,41 @@ class HomeController extends AppController
 		$this->path = ROOT . 'app/models/' . $this->model . '.php';
 		$this->conn = $this->connection();
 		$this->home = new HomeModel();
+		include ROOT.'app/models/CategoryModel.php';
+		include ROOT.'app/models/PlaceModel.php';
+		include ROOT.'app/models/PageModel.php';
+		include ROOT.'app/models/PeopleModel.php';
+		include ROOT.'app/models/EventModel.php';
+		$this->category = new CategoryModel();
+		$this->place = new PlaceModel();
+		$this->page = new PageModel();
+		$this->people = new PeopleModel();
+		$this->event = new EventModel();
 	}
 
 	public function index() 
 	{	
 		$get_users = $this->home->getUsers($this->conn);
 		$data['users'] = $get_users;
-		$data['data'] = $this->home->showArray(10);
+		$data['categories'] = $this->category->getCategories();
+		$places = $this->place->getPlaces();
+		foreach ($places as $key => $place) {
+			$place_status = $this->place->placeStatus($place);
+			$places[$key] = $place_status;
+		}
+		$data['places'] = $places;
+		$data['page'] = $this->page->getPage();
+		$data['people'] = $this->people->getPeopleReviews();
+		$data['experiences'] = $this->place->getExperiences();
+
+		$events = $this->event->getEvents();
+		foreach($events as $key => $event) {
+			$event_status = $this->event->formatDateTime($event);
+			$events[$key] = $event_status;
+		}
+		$data['events'] = $events;
 		$this->set_vars($data);
-		$this->render('home');
+		$this->render('', $data);
 	}
 
 	public function add_user()

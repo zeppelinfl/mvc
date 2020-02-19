@@ -1,0 +1,188 @@
+.search-block {
+	text-align: center;
+	color:#ffffff;
+}
+.container-text {
+	padding-top:5vw;
+}
+.container-text #src-low {
+	font-size:18px;
+}
+.container-text #src-high {
+	font-size:60px;
+}
+.container-search {
+	margin-top:5%;
+	width:80%;
+	margin-left:auto;
+	margin-right:auto;
+}
+.input-group {
+	background-color:#ffffff;
+	border-radius:20px;
+	width:80%;
+}
+.input-format {
+	margin-top:0px !important;
+	border-right:3px solid #cccccc;
+}
+#select-input {
+	border:none;
+	width:50%;
+}
+.search-tags {
+	margin-top:5%;
+	color:#ffffff;
+	display: inline-flex;
+	text-align: center;
+}
+.grey {
+	color:grey;
+	font-size:12px;
+	margin-top:-20px;
+}
+select {
+  background-image:
+    linear-gradient(45deg, transparent 50%, grey 60%),
+    linear-gradient(135deg, grey 40%, transparent 50%) !important;
+  background-position:
+    calc(100% - 30px) 14px,
+    calc(100% - 20px) 14px,
+    100% 0;
+  background-size:
+    5px 10px, 10px 7px;
+  background-repeat: no-repeat;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  color:#cccccc;
+}
+.categ-fluid {
+	background-color: #ffffff;
+	border-radius: 5px;
+	margin-top:50px;
+	border: 1px solid #cccccc;
+}
+.categ-list {
+	display: inline-block;
+	width:140px;
+	padding-top:20px;
+	padding-bottom: 20px;
+	margin:20px;
+	text-align: center;
+	border:1px solid transparent;
+}
+.title-cat {
+	color:#000000;
+	font-size:21px;
+}
+.loc-cat {
+	color:#c3c3c3;
+}
+.signs-cat {
+	color:red;
+	font-size:40px;
+	padding-bottom: 20px;
+}
+.cat-selected {
+	border:1px solid red;
+	border-radius:5px;
+}
+.top-title {
+	font-size:26px;
+	font-weight: bold;
+	margin-left:10vw;
+}
+.top-title-line {
+	margin-left:10vw;
+	height: 10px;
+	border-bottom:1px solid #000000;
+	width:30px;
+	margin-bottom: 10px;
+}
+.top-text {
+	color:#cccccc;
+	margin-left:10vw;
+}
+.top-content {
+	margin-top:6vw;
+	margin-bottom:40px;
+	width: 90vw !important;
+}
+.places-reviews {
+	display: inline-block;
+}
+.review-image {
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	float: left;
+	background-color: #000000;
+	margin:10px;
+	margin-top:50px;
+}
+.review {
+	float: left;
+}
+
+.place-1 {
+	background-image: url('/img/places/hotel1.jpeg');
+}
+.place-2 {
+	background-image: url('/img/places/hotel2.jpeg');	
+}
+.place-3 {
+	background-image: url('/img/places/hotel3.jpeg');
+}
+.place-4 {
+	background-image: url('/img/places/hotel4.jpeg');
+}
+.place-5 {
+	background-image: url('/img/places/hotel5.jpeg');
+}
+.green-rev {
+	background-color: green;
+}	
+.yellow-rev {
+	background-color: orange;
+}
+.red-rev {
+	background-color: red;
+}
+.review-content {
+	margin-left:10px;
+}
+.review-content-width {
+	width:310px;
+}
+.review-content-location > i{
+	font-size:16px !important;
+	margin-top: -5px;
+}
+.fa-history {
+	display: inline-flex;
+	font-size:12px;
+	color:grey;
+}
+.green-color {
+	color:green;
+	padding-left:3px;
+	padding-right:3px;
+}
+.red-color {
+	color:red;
+	padding-left:3px;
+	padding-right:3px;
+}
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+.top-less {
+	margin-right:10px;
+}
+.view-all-events {
+	text-align: center;
+	margin-bottom:20px;
+}
