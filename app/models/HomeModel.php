@@ -5,12 +5,19 @@ class HomeModel
 	public function getUsers($id = '')
 	{
 		if($id != '') {
-			$query = DB::run("SELECT * FROM users WHERE id = $id");
+			$query = DB::run("SELECT * FROM users WHERE id = :id", [':id' => $id]);
 		} else {
 			$query = DB::run("SELECT * FROM users ORDER BY `id` DESC");
 		}
 		//$result = mysqli_query($conn, $query);
 		$rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
+		foreach($rows as $key => $row) {
+			if($row['role'] == 0) {
+				$rows[$key]['role_name'] = 'User';
+			} else {
+				$rows[$key]['role_name'] = 'Admin';
+			}
+		}
 		return $rows;
 	}
 
@@ -40,13 +47,13 @@ class HomeModel
 
 	public function editUser($data)
 	{
-		DB::run("UPDATE users SET name='".$data['name']."', surname='".$data['surname']."', email='".$data['email']."' WHERE id='".$data['id']."'");
+		DB::run("UPDATE users SET name = :name, surname = :surname, email = :email WHERE id = :id", [':name' => $data['name'], ':surname' => $data['surname'], ':email' => $data['email'], ':id' => $data['id']]);
 	}
 
 	public function deleteUser($id)
 	{
 		if($id != '') {
-			if (DB::run("DELETE FROM users WHERE id = $id")) {
+			if (DB::run("DELETE FROM users WHERE id = :id", [':id' => $id])) {
 	               echo "User deleted successfully";
 	        } else {
 	           echo "Error: " . $sql . "" . mysqli_error($conn);

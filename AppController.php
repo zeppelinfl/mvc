@@ -122,7 +122,7 @@ class AppController
 			$admin = true;
 		}
 		if(!$admin) {
-			$this->flash()->message('error', 'Permission Denied');
+			$this->flash()->message('error', 'Access Denied');
 			header('Location: /');
 			exit;
 		}

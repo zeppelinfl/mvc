@@ -22,7 +22,7 @@ class PlaceModel
 
 	public function getOnePlace($id)
 	{
-		$query = DB::run("SELECT *, places.id as places_id, places.name, subcategories.name as subcategory_name FROM places JOIN subcategories ON places.subcategory_id = subcategories.id WHERE places.id = $id");
+		$query = DB::run("SELECT *, places.id as places_id, places.name, subcategories.name as subcategory_name FROM places JOIN subcategories ON places.subcategory_id = subcategories.id WHERE places.id = :id", [':id' => $id]);
 		$row = mysqli_fetch_all($query, MYSQLI_ASSOC);
 		$place_status = $this->placeStatus($row[0]);
 		$row[0] = $place_status;
@@ -31,10 +31,10 @@ class PlaceModel
 
 	public function getExperiences($limit = 4) 
 	{
-		$query = DB::run("SELECT * FROM experiences LEFT JOIN countries ON experiences.country_id = countries.id LIMIT $limit");
+		$query = DB::run("SELECT * FROM experiences LEFT JOIN countries ON experiences.country_id = countries.id LIMIT :limit", [':limit' => $limit]);
 		$rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
 		foreach ($rows as $key => $value) {
-			$query = DB::run("SELECT * FROM cities WHERE cities.country_id = ".$value['country_id']);
+			$query = DB::run("SELECT * FROM cities WHERE cities.country_id = :country_id", [':country_id' => $value['country_id']]);
 			$records = mysqli_fetch_all($query, MYSQLI_ASSOC);
 			$rows[$key]['cities'] = count($records);
 			$rows[$key]['listings'] = 0;

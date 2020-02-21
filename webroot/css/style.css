@@ -3,16 +3,24 @@
 	color:green;
 	border-bottom:1px solid green;
 	background-color:#ffffff;
+	opacity:0.8;
 	font-weight:bold;
-	font-size:30px;
+	font-size:18px;
+	position: fixed;
+	z-index:500;
+	
+	margin:auto;
+	padding:100px 20px 20px 20px;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
 }
 .flash_notice {
 	color:green;
-	border-bottom:1px solid green;
+	border:1px solid green;
 }
 .flash_error {
 	color:red;
-	border-bottom:1px solid red;
+	border:1px solid red;
 }
 body {
 	margin:0px;
@@ -337,4 +345,14 @@ input {
 }
 .out-header {
 	margin-right:20px;
+}
+.search_input {
+	text-decoration: none !important;
+	background-color: transparent;
+	border:none;
+	color:#ffffff;
+	font-size:16px;
+	font-weight:bold;
+	width:100px;
+
 }

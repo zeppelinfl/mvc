@@ -1,11 +1,11 @@
 <?php
 class PageModel
 {
-	public function getPage($page = '')
+	public function getPage($id = '')
 	{
 		$rows = '';
-		if($page != '') {
-			$query = DB::run("SELECT * FROM pages WHERE id = $page");
+		if($id != '') {
+			$query = DB::run("SELECT * FROM pages WHERE id = :id", [':id' => $id]);
 			$rows = mysqli_fetch_assoc($query);
 		}
 		return $rows;

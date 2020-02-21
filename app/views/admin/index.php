@@ -1,19 +1,54 @@
 <div class="container admin-contacts">
 	<h2>Contacts</h2>
-	<div class="row admin-contacts-header-row">
-		<div class="col">Id</div>
-		<div class="col">Name</div>
-		<div class="col">Email</div>
-		<div class="col">Created</div>
-		<div class="col">Updated</div>
-	</div>
-	<?php foreach($contacts as $contact) { ?>
-		<div class="row admin-contacts-body-row">
-			<div class="col col-body"><?php echo $contact['id']; ?></div>
-			<div class="col col-body"><?php echo $contact['name']; ?></div>
-			<div class="col col-body"><?php echo $contact['email']; ?></div>
-			<div class="col col-body"><?php echo $contact['created']; ?></div>
-			<div class="col col-body"><?php echo $contact['updated']; ?></div>
-		</div>
-	<?php } ?>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">Name</th>
+				<th scope="col">Email</th>
+				<th scope="col">Created</th>
+				<th scope="col">Updated</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($contacts as $contact) { ?>
+				<tr>
+					<th scope="row"><?php echo $contact['id']; ?></th>
+					<td><?php echo $contact['name']; ?></td>
+					<td><?php echo $contact['email']; ?></td>
+					<td><?php echo $contact['created']; ?></td>
+					<td><?php echo $contact['updated']; ?></td>
+				</tr>
+			<?php } ?>
+		</tbody>
+	</table>
+</div>
+<div class="container admin-contacts">
+<h2>Users</h2>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">Name</th>
+				<th scope="col">Surname</th>
+				<th scope="col">Email</th>
+				<th scope="col">Role</th>
+				<th scope="col">Created</th>
+				<th scope="col">Updated</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($users as $user) { ?>
+				<tr>
+					<th scope="row"><?php echo $user['id']; ?></th>
+					<td><?php echo $user['name']; ?></td>
+					<td><?php echo $user['surname']; ?></td>
+					<td><?php echo $user['email']; ?></td>
+					<td><?php echo $user['role_name']; ?></td>
+					<td><?php echo $user['created']; ?></td>
+					<td><?php echo $user['updated']; ?></td>
+				</tr>
+			<?php } ?>
+		</tbody>
+	</table>
 </div>

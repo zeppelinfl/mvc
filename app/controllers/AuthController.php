@@ -70,7 +70,7 @@ class AuthController extends AppController
 	{
 		if(!empty($_POST)) {
 			$user_data = $_POST;
-			$reg = $this->auth->registerUser();
+			$reg = $this->auth->registerUser($user_data);
 			if($reg) {
 				$this->flash()->message('notice', 'User has been created succesfully');
 				header('Location: /');

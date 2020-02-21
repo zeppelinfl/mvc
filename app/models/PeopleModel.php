@@ -3,7 +3,7 @@ class PeopleModel
 {
 	public function getPeopleReviews($limit = 3)
 	{
-		$query = DB::run("SELECT * FROM reviews LEFT JOIN users ON reviews.user_id = users.id LIMIT $limit");
+		$query = DB::run("SELECT * FROM reviews LEFT JOIN users ON reviews.user_id = users.id LIMIT :limit", [':limit' => $limit]);
 		$rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
 		foreach ($rows as $key => $value) {
 			if($value['image'] == '' || !file_exists(WEBROOT.'img/users/'.$value['user_id'].'/'.$value['image'])) {

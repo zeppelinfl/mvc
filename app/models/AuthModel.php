@@ -5,7 +5,7 @@ class AuthModel
 	{
 		$email = $data['email'];
 		$password = password_hash($data['password'], PASSWORD_DEFAULT);
-		$select = DB::run("SELECT * FROM users WHERE email = '$email'");
+		$select = DB::run("SELECT * FROM users WHERE email = :email", [':email' => $email]);
 		$rows = mysqli_fetch_all($select, MYSQLI_ASSOC);
 		if(password_verify($data['password'], $rows[0]['password'])) {
 			session_regenerate_id();
@@ -24,8 +24,9 @@ class AuthModel
 	{
 		if(!empty($data['password']) && $data['password'] == $data['passwrd']) {
 			$email = $data['email'];
-			$select = DB::run("SELECT * FROM users WHERE email = '$email'");
+			$select = DB::run("SELECT * FROM users WHERE email = :email", [':email' => $email]);
 			$rows = mysqli_fetch_all($select, MYSQLI_ASSOC);
+
 			$exists = 0;
 			if(!empty($rows) && $rows[0]['email'] == $data['email']) {
 				$exists = 1;
@@ -35,7 +36,7 @@ class AuthModel
 			$created = false;
 			if(!$exists) {
 				$created = true;
-				DB::run("INSERT INTO users (name, surname, email, password) VALUES ('".$data['name']."', '".$data['surname']."', '".$data['email']."', '".$data['password']."')");
+				DB::run("INSERT INTO users (name, surname, email, password) VALUES (:name, :surname, :email, :password)", [':name' => $data['name'], ':surname' => $data['surname'], ':email' => $data['email'], ':password' => $data['password']]);
 			}
 			return $created;
 		}

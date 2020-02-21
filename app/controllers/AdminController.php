@@ -12,7 +12,13 @@ class AdminController extends AppController
 		$this->admin = new AdminModel();
 
 		include ROOT.'app/models/ContactModel.php';
+		include ROOT.'app/models/HomeModel.php';
+		include ROOT.'app/models/CountryModel.php';
+		include ROOT.'app/models/CityModel.php';
 		$this->contact = new ContactModel();
+		$this->home = new HomeModel();
+		$this->country = new CountryModel();
+		$this->city = new CityModel();
 		$this->admin();
 	}
 
@@ -23,6 +29,7 @@ class AdminController extends AppController
 		$data['title'] = 'MVC - Admin';
 
 		$body['contacts'] = $this->contact->listContacts();
+		$body['users'] = $this->home->getUsers();
 
 		$data['body'] = $this->render('index', $body, false);
 		$data['footer'] = $this->render('/layouts/admin/footer', null, false);
@@ -35,6 +42,7 @@ class AdminController extends AppController
 		$data['header'] = $this->render('/layouts/admin/header', null, false);
 		$data['title'] = 'MVC - Countries';
 
+		$body['countries'] = $this->country->listCountries();
 
 		$data['body'] = $this->render('countries', $body, false);
 		$data['footer'] = $this->render('/layouts/admin/footer', null, false);
@@ -46,7 +54,8 @@ class AdminController extends AppController
 		$body = [];
 		$data['header'] = $this->render('/layouts/admin/header', null, false);
 		$data['title'] = 'MVC - Cities';
-
+		
+		$body['cities'] = $this->city->listCities();
 
 		$data['body'] = $this->render('cities', $body, false);
 		$data['footer'] = $this->render('/layouts/admin/footer', null, false);

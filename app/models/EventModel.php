@@ -6,7 +6,7 @@ class EventModel
 		$query = DB::run("SELECT * FROM events LIMIT $limit");
 		$rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
 		foreach ($rows as $key => $value) {
-			$query_two = DB::run("SELECT name FROM types WHERE id = ".$value['type_id']);
+			$query_two = DB::run("SELECT name FROM types WHERE id = :type_id", [':type_id' => $value['type_id']]);
 			$row_type = mysqli_fetch_assoc($query_two);
 			$rows[$key]['type'] = $row_type['name'];
 		}
@@ -18,7 +18,7 @@ class EventModel
 		$query = DB::run("SELECT * FROM events");
 		$rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
 		foreach ($rows as $key => $value) {
-			$query_two = DB::run("SELECT name FROM types WHERE id = ".$value['type_id']);
+			$query_two = DB::run("SELECT name FROM types WHERE id = :type_id", [':type_id' => $value['type_id']]);
 			$row_type = mysqli_fetch_assoc($query_two);
 			$rows[$key]['type'] = $row_type['name'];
 		}
@@ -30,7 +30,7 @@ class EventModel
 		$query = DB::run("SELECT * FROM events WHERE id = $id");
 		$rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
 		foreach ($rows as $key => $value) {
-			$query_two = DB::run("SELECT name FROM types WHERE id = ".$value['type_id']);
+			$query_two = DB::run("SELECT name FROM types WHERE id = :type_id", [':type_id' => $value['type_id']]);
 			$row_type = mysqli_fetch_assoc($query_two);
 			$rows[$key]['type'] = $row_type['name'];
 		}
