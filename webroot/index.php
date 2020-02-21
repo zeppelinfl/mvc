@@ -6,8 +6,9 @@ ini_set('display_errors', true);
 define('WEBROOT', str_replace('webroot/index.php', '', $_SERVER['SCRIPT_NAME']));
 define('ROOT', str_replace('webroot/index.php', '', $_SERVER['SCRIPT_FILENAME']));
 
-include ROOT.'app/config/database.php';
+require_once ROOT.'app/config/database.php';
+require_once ROOT.'app/config/flash.php';
 require(ROOT . 'AppController.php');
 
 $appController = new AppController();
-$appController->dispatch($conn);
+$appController->dispatch();

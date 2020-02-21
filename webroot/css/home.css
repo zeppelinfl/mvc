@@ -57,14 +57,14 @@ select {
   color:#cccccc;
 }
 .categ-fluid {
-	background-color: #ffffff;
+	background-color: #ffffff !important;
 	border-radius: 5px;
-	margin-top:50px;
+	margin-top:100px;
 	border: 1px solid #cccccc;
 }
 .categ-list {
 	display: inline-block;
-	width:140px;
+	width: 123px;
 	padding-top:20px;
 	padding-bottom: 20px;
 	margin:20px;
@@ -124,21 +124,7 @@ select {
 	float: left;
 }
 
-.place-1 {
-	background-image: url('/img/places/hotel1.jpeg');
-}
-.place-2 {
-	background-image: url('/img/places/hotel2.jpeg');	
-}
-.place-3 {
-	background-image: url('/img/places/hotel3.jpeg');
-}
-.place-4 {
-	background-image: url('/img/places/hotel4.jpeg');
-}
-.place-5 {
-	background-image: url('/img/places/hotel5.jpeg');
-}
+
 .green-rev {
 	background-color: green;
 }	

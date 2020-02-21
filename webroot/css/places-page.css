@@ -1,0 +1,31 @@
+.content-places-page {
+	width:80vw;
+	margin:auto;
+	margin-top:50px;
+	background-color: #ffffff;
+	border-radius:10px;
+}
+.review-content {
+	height:500px;
+}
+.review-places-page {
+	//width:300px;
+	padding:20px;
+}
+.review-image-places {
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+.col-places-single {
+	margin-top:100px;
+}
+.container-places-single {
+	border-radius: 10px;
+	width:60vw !important;
+	margin-top:40px;
+	text-align: center;
+	background-color:#cccccc;
+}
+.row-places-single {
+	padding-bottom:40px;
+}

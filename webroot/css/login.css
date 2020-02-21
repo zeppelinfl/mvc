@@ -1,0 +1,30 @@
+.container-login {
+	text-align:center;
+}
+.login-input {
+	border:1px solid grey;
+	padding:20px;
+	width:400px !important;
+	border-radius:40px;
+}
+input[type=submit] {
+	margin-top:20px;
+	background-color: grey;
+	color:#ffffff;
+	font-weight:bold;
+	font-size:18px;
+}
+.login-title {
+	margin-top:20px;
+	margin-bottom:20px;
+	color:#ffffff;
+	font-weight: bold;
+	font-size:42px;
+}
+.message-input {
+	height:200%;
+	margin-bottom: 20px;
+}
+.contact {
+	margin-top:140px !important;
+}

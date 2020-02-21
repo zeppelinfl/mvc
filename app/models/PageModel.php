@@ -1,12 +1,13 @@
 <?php
 class PageModel
 {
-	public function getPage()
+	public function getPage($page = '')
 	{
-		return [
-			'id' => 1,
-			'title' => 'Join Our Amazing Community',
-			'content' => 'Lorem ipsum dolor sit amet, conse ctetuer adipiscing elit, sed diam monu mmy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.'
-		];
+		$rows = '';
+		if($page != '') {
+			$query = DB::run("SELECT * FROM pages WHERE id = $page");
+			$rows = mysqli_fetch_assoc($query);
+		}
+		return $rows;
 	}
 }

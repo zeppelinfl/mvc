@@ -1,25 +1,48 @@
 <?php
 class PlaceModel
 {
-	public function getPlaces()
+	public function getPlaces($limit = 5)
 	{
-		return [
-			0 => ['id' => 1, 'subcategory_name' => 'Restaurant', 'name' => 'Fifteen Restaurant & Cheese Bar','image' => '/img/places/hotel1.jpeg', 'open' => '08:00', 'close' => '20:00', 'reviews_count' => '54' , 'address' => '1149 3rd St, Santa Monica', 'reviews_score' => '9.3'],
-			2 => ['id' => 1, 'subcategory_name' => 'Cafe', 'name' => 'Frankies 457 Spuntino','image' => '/img/places/hotel2.jpeg', 'open' => '08:00', 'close' => '20:00', 'reviews_count' => '54' , 'address' => '457 Court St, Brooklyn', 'reviews_score' => '9.0'],
-			3 => ['id' => 1, 'subcategory_name' => 'Hostel', 'name' => 'Hotel Van Gogh','image' => '/img/places/hotel3.jpeg', 'open' => '08:00', 'close' => '20:00', 'reviews_count' => '54' , 'address' => 'Van de Veldestraat 5, Amsterdam', 'reviews_score' => '8.5'],
-			4 => ['id' => 1, 'subcategory_name' => 'Cafe', 'name' => 'Caffe Pasucci','image' => '/img/places/hotel4.jpeg', 'open' => '08:00', 'close' => '20:00', 'reviews_count' => '54' , 'address' => 'Piazza della Repubblica, Florence', 'reviews_score' => '9.1'],
-			5 => ['id' => 1, 'subcategory_name' => 'Hotel', 'name' => 'Beautiful City Hoster & Hotel','image' => '/img/places/hotel5.jpeg', 'open' => '08:00', 'close' => '20:00', 'reviews_count' => '54' , 'address' => '12 rue de latlas, Paris', 'reviews_score' => '6.2']
-		];
+		$query = DB::run("SELECT *, places.id as places_id, places.name, subcategories.name as subcategory_name FROM places JOIN subcategories ON places.subcategory_id = subcategories.id LIMIT $limit");
+		$rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
+		
+		return $rows;
 	}
 
-	public function getExperiences() 
+	public function getAllPlaces()
 	{
-		return [
-			0 => ['id' => 1, 'country_name' => 'Malaysia', 'cities_count' => 5, 'listing_count' => 255, 'image' => '/img/places/hotel2.jpeg'],
-			1 => ['id' => 2, 'country_name' => 'Italy', 'cities_count' => 8, 'listing_count' => 749, 'image' => '/img/places/hotel3.jpeg'],
-			2 => ['id' => 3, 'country_name' => 'France', 'cities_count' => 12, 'listing_count' => 1003, 'image' => '/img/places/hotel4.jpeg'],
-			3 => ['id' => 4, 'country_name' => 'United States', 'cities_count' => 4, 'listing_count' => 603, 'image' => '/img/places/hotel5.jpeg'],
-		];
+		$query = DB::run("SELECT *, places.id as places_id, places.name, subcategories.name as subcategory_name FROM places JOIN subcategories ON places.subcategory_id = subcategories.id");
+		$rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
+		foreach ($rows as $key => $place) {
+			$place_status = $this->placeStatus($place);
+			$rows[$key] = $place_status;
+		}
+		return $rows;
+	}
+
+	public function getOnePlace($id)
+	{
+		$query = DB::run("SELECT *, places.id as places_id, places.name, subcategories.name as subcategory_name FROM places JOIN subcategories ON places.subcategory_id = subcategories.id WHERE places.id = $id");
+		$row = mysqli_fetch_all($query, MYSQLI_ASSOC);
+		$place_status = $this->placeStatus($row[0]);
+		$row[0] = $place_status;
+		return $row[0];
+	}
+
+	public function getExperiences($limit = 4) 
+	{
+		$query = DB::run("SELECT * FROM experiences LEFT JOIN countries ON experiences.country_id = countries.id LIMIT $limit");
+		$rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
+		foreach ($rows as $key => $value) {
+			$query = DB::run("SELECT * FROM cities WHERE cities.country_id = ".$value['country_id']);
+			$records = mysqli_fetch_all($query, MYSQLI_ASSOC);
+			$rows[$key]['cities'] = count($records);
+			$rows[$key]['listings'] = 0;
+			foreach ($records as $city) {
+				$rows[$key]['listings'] += $city['listings'];
+			}
+		}
+		return $rows;
 	}
 
 	public function placeStatus($place)

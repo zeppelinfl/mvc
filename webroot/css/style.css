@@ -1,9 +1,29 @@
+.flash {
+	text-align: center;
+	color:green;
+	border-bottom:1px solid green;
+	background-color:#ffffff;
+	font-weight:bold;
+	font-size:30px;
+}
+.flash_notice {
+	color:green;
+	border-bottom:1px solid green;
+}
+.flash_error {
+	color:red;
+	border-bottom:1px solid red;
+}
 body {
 	margin:0px;
 	padding: 0px;	
 }
 footer {
 	background-color:#303030;
+}
+a {
+	color:#ffffff !important;
+	text-decoration: none !important;
 }
 .empty-content {
 	height: 80%;
@@ -70,10 +90,10 @@ input {
 	font-weight: bold;
 }
 .container {
-	width:80vw;
+	width:90vw;
 }
 .container-fluid {
-	width:60vw !important;
+	width:80vw !important;
 	background: transparent;
 	z-index: 200;
 }
@@ -314,4 +334,7 @@ input {
 .join-content-top {
 	font-size:18px;
 	font-weight:bold;
+}
+.out-header {
+	margin-right:20px;
 }

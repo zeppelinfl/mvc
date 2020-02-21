@@ -2,16 +2,27 @@
 class HomeModel
 {
 
-	public function getUsers($conn, $id = '')
+	public function getUsers($id = '')
 	{
 		if($id != '') {
-			$query = "SELECT * FROM users WHERE id = $id";
+			$query = DB::run("SELECT * FROM users WHERE id = $id");
 		} else {
-			$query = "SELECT * FROM users ORDER BY `id` DESC";
+			$query = DB::run("SELECT * FROM users ORDER BY `id` DESC");
 		}
-		$result = mysqli_query($conn, $query);
-		$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+		//$result = mysqli_query($conn, $query);
+		$rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
 		return $rows;
+	}
+
+	public function getCities()
+	{
+		$query = DB::run("SELECT * FROM cities ORDER BY name ASC");
+		$rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
+		$cities = [];
+		foreach ($rows as $key => $value) {
+			$cities[$value['id']] = $value['name'];
+		}
+		return $cities;
 	}
 
 	public function showArray($num = 5)
@@ -27,35 +38,15 @@ class HomeModel
 		return $array;
 	}
 
-	public function addUser($data, $conn)
+	public function editUser($data)
 	{
-		if(!empty($data['password']) && $data['password'] == $data['passwrd']) {
-			unset($data['passwrd']);
-			$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-			$insert = "INSERT INTO users (name, surname, email, password) VALUES ('".$data['name']."', '".$data['surname']."', '".$data['email']."', '".$data['password']."')";
-			if (mysqli_query($conn, $insert)) {
-	               echo "User created successfully";
-	        } else {
-	           echo "Error: " . $sql . "" . mysqli_error($conn);
-	        }
-		}
+		DB::run("UPDATE users SET name='".$data['name']."', surname='".$data['surname']."', email='".$data['email']."' WHERE id='".$data['id']."'");
 	}
 
-	public function editUser($data, $conn)
-	{
-		$edit = "UPDATE users SET name='".$data['name']."', surname='".$data['surname']."', email='".$data['email']."' WHERE id='".$data['id']."'";
-		if (mysqli_query($conn, $edit)) {
-			echo "User updated successfully";
-			} else {
-			echo "Error: " . $sql . "" . mysqli_error($conn);
-		}
-	}
-
-	public function deleteUser($id, $conn)
+	public function deleteUser($id)
 	{
 		if($id != '') {
-			$delete = "DELETE FROM users WHERE id = $id";
-			if (mysqli_query($conn, $delete)) {
+			if (DB::run("DELETE FROM users WHERE id = $id")) {
 	               echo "User deleted successfully";
 	        } else {
 	           echo "Error: " . $sql . "" . mysqli_error($conn);

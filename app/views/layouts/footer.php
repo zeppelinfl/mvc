@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/css/footer.css">
+<link rel="stylesheet" href="<?php echo WEBROOT; ?>css/footer.css">
 <footer>
 	<div class="container">
 		<div class="row row-grey">

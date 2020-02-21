@@ -11,10 +11,11 @@ class AppController
 		$ucfirst = ucfirst($url_parsed[0]);
 		if(file_exists(ROOT.'app/models/'.$ucfirst.'Model.php')) {
 			require(ROOT.'app/models/'.$ucfirst.'Model.php');
-		}		
+		}	
 	}
 
-	/** AppController.php
+	/** 
+	* AppController.php
 	* GET CURRENT URL
 	**/
 	public function request() 
@@ -23,26 +24,29 @@ class AppController
 		return $this->url;
 	}
 
-	/** AppController.php
-	*	
+	/** 
+	*	AppController.php
 	*
 	**/
-	public function dispatch($conn) 
+	public function dispatch() 
 	{
 		$parsed_url = $this->parseUrl();
 		$controller = $this->loadController($parsed_url[0]);
-
+		$this->render('/layouts/flash_msg', null, false);
+		$this->flash();
 		call_user_func_array([$controller, $parsed_url[1]], $parsed_url[2]);
 
 	}
 
-	/** AppController.php
+	/** 
+	*	AppController.php
 	*	Parse and format url to set /controller/action/param1/param2/....
 	*	If it's base url then use home controller, index action
 	**/
 	public function parseUrl() 
 	{
 		$to_parse = trim($this->request());
+		$to_parse = strtok($to_parse, '?');
 		if($to_parse == '/') {
 			$controller = 'home';
 			$action = 'index';
@@ -74,38 +78,57 @@ class AppController
         $this->vars = array_merge($this->vars, $d);
     }
 
-	function render($filename = '') 
+	function render($filename = '', $data, $return = false, $header = '') 
 	{
+		if(is_array($data)) {
+			extract($data);
+		}
 		if($filename == '') {
 			$filename = $this->parseUrl()[1];
 		}
-		extract($this->vars);
-		ob_start();
-
-		if(file_exists(ROOT . 'app/views/'.$this->parseUrl()[0].'/'.$filename.'.php')) {
-			require(ROOT . 'app/views/' . strtolower(str_replace('Controller', '', get_class($this))) . '/' . $filename . '.php');	
+		$file_exists = 0;
+		if(file_exists(ROOT . 'app/views/'.$filename.'.php')) {
+			$file_exists = 1;
 		}
-
-		$header = ob_get_clean();
-		$body = ob_get_clean();
-		$footer = ob_get_clean();
-
-		if($this->layout == false) {
-			$body;
-		} else {
-			require(ROOT . 'app/views/layouts/header.php');
-			require(ROOT . 'app/views/layouts/' . $this->layout . '.php');
-			require(ROOT . 'app/views/layouts/footer.php');
+		if(strpos($filename, '/') === false && file_exists(ROOT . 'app/views/' . strtolower(str_replace('Controller', '', get_class($this))) . '/' . $filename . '.php')) {
+			$file_exists = 1;
+		}
+		if(!$return && $file_exists) {
+			if(strpos($filename, '/') === false) {
+				require(ROOT . 'app/views/' . strtolower(str_replace('Controller', '', get_class($this))) . '/' . $filename . '.php');	
+			} else {
+				require(ROOT . 'app/views/' . $filename . '.php');	
+			}
 		}
 	}
 
-	public function connection() 
+	public function user()
 	{
-		$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-		// Check connection
-		if (!$conn) {
-		    die("Connection failed: " . mysqli_connect_error());
+		$user = false;
+		if(isset($_SESSION['loggedin'])) {
+			$user = true;
 		}
-		return $conn;
+		if(!$user) {
+			$this->flash()->message('error', 'You need to login to see this content');
+			header('Location: /');
+			exit;
+		}
+	}
+
+	public function admin()
+	{	
+		$admin = false;
+		if(isset($_SESSION['loggedin']) && $_SESSION['role'] == 1) {
+			$admin = true;
+		}
+		if(!$admin) {
+			$this->flash()->message('error', 'Permission Denied');
+			header('Location: /');
+			exit;
+		}
+	}
+
+	function flash() {
+  		return FlashMessages::instance();
 	}
 }

@@ -1,0 +1,19 @@
+a {
+	color: none !important;
+	text-decoration: none !important;
+}
+.admin-contacts {
+	border:1px solid #cccccc;
+	border-radius:5px;
+	
+}
+.admin-contacts-header-row {
+	background-color:#c0c0c0;
+	border-bottom: 3px solid #cccccc;
+}
+.admin-contacts-body-row {
+	border-bottom: 1px solid #cccccc;	
+}
+.col-body {
+	border-right: 1px solid #cccccc;
+}
