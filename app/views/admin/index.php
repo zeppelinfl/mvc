@@ -14,7 +14,7 @@
 			<?php foreach ($contacts as $contact) { ?>
 				<tr>
 					<th scope="row"><?php echo $contact['id']; ?></th>
-					<td><?php echo $contact['name']; ?></td>
+					<td><a href="/contact/view/<?php echo $contact['id']; ?>"><?php echo $contact['name']; ?></a></td>
 					<td><?php echo $contact['email']; ?></td>
 					<td><?php echo $contact['created']; ?></td>
 					<td><?php echo $contact['updated']; ?></td>

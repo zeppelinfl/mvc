@@ -18,4 +18,11 @@ class ContactModel
 		$rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
 		return $rows;
 	}
+
+	public function getContact($id)
+	{
+		$query = DB::run("SELECT * FROM contacts WHERE id = :id", [':id' => $id]);
+		$rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
+		return $rows[0];
+	}
 }
